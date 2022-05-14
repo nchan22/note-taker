@@ -64,3 +64,30 @@ router.post("/notes", function (req, res) {
 
   res.json(notes);
 });
+
+//deletes a note depending on the id sent by the client-side js
+router.delete("/notes/:id", function (req, res) {
+  var id = req.params.id;
+  fs.readFileSync("./data/db.json", (err, data) => {
+    if (err) throw err;
+    notes = JSON.parse(data);
+  });
+
+  for (var i = 0; i < notes.length; i++) {
+    if (notes[i].id == id) {
+      console.log("Deleting ==============");
+      console.log(notes[i]);
+      notes.splice(i, 1);
+    }
+  }
+
+  fs.writeFile("./data/db.json", JSON.stringify(notes), (err) => {
+    if (err) throw err;
+    console.log("The file was updated!");
+  });
+
+  res.json(id);
+});
+
+// exports these routes so they can be used by other files
+module.exports = router;
