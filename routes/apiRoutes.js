@@ -13,6 +13,7 @@ router.get("/notes", function (req, res) {
     return res.json(notes);
   });
 });
+
 // create a GET function that gets notes by ID
 router.get("/notes/:id", function (req, res) {
   var id = req.params.id;
@@ -32,4 +33,34 @@ router.get("/notes/:id", function (req, res) {
   }
 
   res.json(id);
+});
+
+//creates or updates a NOTE. -1 if new note else updated note
+router.post("/notes", function (req, res) {
+  console.log("New Note ====================");
+  fs.readFileSync("./data/db.json", (err, data) => {
+    if (err) throw err;
+    notes = JSON.parse(data);
+  });
+
+  var newNote;
+  if (req.body.id == -1) {
+    newNote = new Note(req.body.title, req.body.body);
+    notes.push(newNote);
+  } else {
+    newNote = req.body;
+    for (var i = 0; i < notes.length; i++) {
+      if (newNote.id == notes[i].id) {
+        notes.splice(i, 1, newNote);
+      }
+    }
+  }
+  console.log(newNote);
+
+  fs.writeFile("./data/db.json", JSON.stringify(notes), (err) => {
+    if (err) throw err;
+    console.log("The file was updated!");
+  });
+
+  res.json(notes);
 });
