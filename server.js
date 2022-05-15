@@ -37,11 +37,11 @@ app.post("/api/notes", (req, res) => {
 
   content.push(note);
   fs.writeFileSync("data/db.json", JSON.stringify(content));
-  res.sendFile(path.join(__dirname, "/data/notes.html"));
+  res.sendFile(path.join(__dirname, "notes.html"));
 });
 
 app.delete("/api/notes/:id", (req, res) => {
-  let fileContent = JSON.parse(fs.readFileSync("./data/db.json", "utf8"));
+  let fileContent = JSON.parse(fs.readFileSync("data/db.json", "utf8"));
   let noteID = req.params.id;
   let index = 0;
   fileContent = fileContent.filter((note) => {
@@ -53,7 +53,7 @@ app.delete("/api/notes/:id", (req, res) => {
     index++;
   }
   res.json(fileContent);
-  fs.writeFileSync("./data/db.json", JSON.stringify(fileContent));
+  fs.writeFileSync("data/db.json", JSON.stringify(fileContent));
 });
 
 // app.listen(port, () =>
