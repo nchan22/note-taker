@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const res = require("express/lib/response");
 const fs = require("fs");
+const Note = require("../data/note");
 var notes = [];
 
 // following the CRUD methods; create, read, update, delete notes
