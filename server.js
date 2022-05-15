@@ -11,7 +11,7 @@ const notes = [];
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static("public"));
+app.use(express.static("routes"));
 
 //routes to index
 router.get("/", function (req, res) {
@@ -24,24 +24,24 @@ router.get("/notes", function (req, res) {
 });
 
 app.get("/api/notes", (req, res) => {
-  let file = fs.readFileSync("db/db.json");
+  let file = fs.readFileSync("data/db.json");
   let content = JSON.parse(file);
   res.json(content);
 });
 
 app.post("/api/notes", (req, res) => {
-  const file = fs.readFileSync("db/db.json");
+  const file = fs.readFileSync("data/db.json");
   const content = JSON.parse(file);
   console.log(content);
   const note = { ...req.body, id: content.length + 1 };
 
   content.push(note);
-  fs.writeFileSync("db/db.json", JSON.stringify(content));
-  res.sendFile(path.join(__dirname, "/public/notes.html"));
+  fs.writeFileSync("data/db.json", JSON.stringify(content));
+  res.sendFile(path.join(__dirname, "/data/notes.html"));
 });
 
 app.delete("/api/notes/:id", (req, res) => {
-  let fileContent = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
+  let fileContent = JSON.parse(fs.readFileSync("./data/db.json", "utf8"));
   let noteID = req.params.id;
   let index = 0;
   fileContent = fileContent.filter((note) => {
@@ -53,7 +53,7 @@ app.delete("/api/notes/:id", (req, res) => {
     index++;
   }
   res.json(fileContent);
-  fs.writeFileSync("./db/db.json", JSON.stringify(fileContent));
+  fs.writeFileSync("./data/db.json", JSON.stringify(fileContent));
 });
 
 // app.listen(port, () =>
