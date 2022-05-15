@@ -286,10 +286,7 @@
         };
 
         $.post("/api/notes/", newNote).then(function (data) {
-          let file = fs.readFileSync("data/db.json");
-          let content = JSON.parse(data);
           console.log(data);
-          res.json(content);
         });
       });
 
@@ -310,8 +307,8 @@
       //Gets all notes from server
       //Loops through every note and created DOM elements to display note cards on the webpage
       function renderNotes() {
-        // $("#form").css("display", "none");
-        // $("#note").css("display", "none");
+        $("#form").css("display", "none");
+        $("#note").css("display", "none");
 
         $.get("/api/notes", function (data) {
           for (var i = 0; i < data.length; i++) {
