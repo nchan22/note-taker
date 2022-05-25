@@ -13,7 +13,7 @@
 * express.js
 
 ### How to use:
-* 
+* Go to the website found below and create your notes!
 
 ## Website:
 https://nchan22-note-taker.herokuapp.com
@@ -30,4 +30,4 @@ https://nchan22-note-taker.herokuapp.com
 
 
 ## Contributors:
-* Nathaniel Chan (https://github.com/nchan22)
+* Nathaniel Chan(https://github.com/nchan22)
