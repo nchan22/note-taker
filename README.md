@@ -30,4 +30,5 @@ https://nchan22-note-taker.herokuapp.com
 
 
 ## Contributors:
-* Nathaniel Chan(https://github.com/nchan22)
+* [Original starter code written by user coding-boot-camp](https://github.com/coding-boot-camp/miniature-eureka)
+* [Nathaniel Chan](https://github.com/nchan22)
